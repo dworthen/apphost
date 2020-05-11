@@ -2,7 +2,8 @@
   "name": "apphost",
   "version": "0.0.1",
   "description": "Configuration and service manager. Load config from file, environment variables and cli args.",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/typings/index.d.ts",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "test": "tap -R spec",
