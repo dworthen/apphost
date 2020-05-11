@@ -1,0 +1,3 @@
+test-arg:
+  - command
+  - --cors.allowed.2=path3
