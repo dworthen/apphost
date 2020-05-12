@@ -21,7 +21,10 @@
     "argv",
     "configuration manager"
   ],
-  "author": "Derek Worthen",
+  "author": {
+    "name": "Derek Worthen",
+    "email": "worthend.derek@gmail.com"
+  },
   "homepage": "https://github.com/dworthen/apphost",
   "repository": {
     "type": "git",
