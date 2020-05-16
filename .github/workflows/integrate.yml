@@ -40,6 +40,12 @@ jobs:
     
     - name: build
       run: pnpm run build
+    
+    - name: test
+      continue-on-error: true
+      run: |
+        pnpm run test
+        pnpm run test:coverage
 
     - name: test coverage
       run: pnpm run test:coverage
