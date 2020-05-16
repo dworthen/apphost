@@ -7,7 +7,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "clean": "shx rm -r lib",
-    "lint": "eslint src/**",
+    "lint": "eslint \"src/**\"",
     "test": "tap -R spec",
     "test:coverage": "tap --coverage-report html",
     "build": "tsc",
