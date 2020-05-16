@@ -1,16 +1,16 @@
-import { IAppHost, AppHostExtension } from "apphost";
-import type { Section } from "command-line-usage";
-import commandLineUsage from "command-line-usage";
-import { resolve } from "path";
-import { existsSync } from "fs";
+import { IAppHost, AppHostExtension } from 'apphost';
+import type { Section } from 'command-line-usage';
+import commandLineUsage from 'command-line-usage';
+import { resolve } from 'path';
+import { existsSync } from 'fs';
 
-export type CliUsage = CliCommands | Section | Section[] | string;
+export type CliUsage = ICliCommands | Section | Section[] | string;
 
-export interface CliCommands {
+export interface ICliCommands {
   commands: Record<string, Section | Section[]>;
 }
 
-export interface AddCliUsageOptions {
+export interface IAddCliUsageOptions {
   help: string;
 }
 
@@ -20,55 +20,21 @@ enum UsageType {
   Sections,
 }
 
-export function addCliUsage(
-  usage: CliUsage,
-  options?: AddCliUsageOptions
-): AppHostExtension {
-  const opts: AddCliUsageOptions = Object.assign(
-    { help: "help" },
-    options ?? {}
-  );
-  return (appHost: IAppHost) => {
-    switch (getType(usage)) {
-      case UsageType.String:
-        loadFile(appHost, usage as string, opts);
-        break;
-      case UsageType.Commands:
-        processCommand(appHost, usage as CliCommands, opts);
-        break;
-      case UsageType.Sections:
-        printHelp(appHost, usage as Section | Section[], opts);
-        break;
-    }
-    return appHost;
-  };
-}
-
-function loadFile(
-  appHost: IAppHost,
-  filename: string,
-  options: AddCliUsageOptions
-) {
-  const filePath = resolve(appHost.basPath, filename);
-  if (!existsSync(filePath)) {
-    throw new Error(`Error. Failed to load ${filePath}.`);
-  }
-  const usage = require(filePath);
-  switch (getType(usage)) {
-    case UsageType.Commands:
-      processCommand(appHost, usage as CliCommands, options);
-      break;
-    case UsageType.Sections:
-      printHelp(appHost, usage as Section | Section[], options);
-      break;
+function getType(usage: CliUsage): UsageType {
+  if (typeof usage === 'string') {
+    return UsageType.String;
+  } else if ((usage as ICliCommands).commands) {
+    return UsageType.Commands;
+  } else {
+    return UsageType.Sections;
   }
 }
 
 function printHelp(
   appHost: IAppHost,
   usage: Section | Section[],
-  options: AddCliUsageOptions
-) {
+  options: IAddCliUsageOptions
+): void {
   if (options.help && appHost.get<boolean>(options.help)) {
     console.log(commandLineUsage(usage));
     process.exit(1);
@@ -77,16 +43,16 @@ function printHelp(
 
 function processCommand(
   appHost: IAppHost,
-  { commands }: CliCommands,
-  options: AddCliUsageOptions
-) {
-  let [command = ""] = appHost.get<string[]>("__args") ?? [];
+  { commands }: ICliCommands,
+  options: IAddCliUsageOptions
+): void {
+  const [command = ''] = appHost.get<string[]>('__args') ?? [];
   if (command && commands[command]) {
     printHelp(appHost, commands[command], options);
   } else if (commands.main) {
     printHelp(appHost, commands.main, options);
   } else {
-    const sections = Object.entries(commands).reduce<Section[]>(
+    const sections: Section[] = Object.entries(commands).reduce<Section[]>(
       (acc, [cmd, use]) => {
         return acc.concat(use);
       },
@@ -96,12 +62,46 @@ function processCommand(
   }
 }
 
-function getType(usage: CliUsage): UsageType {
-  if (typeof usage === "string") {
-    return UsageType.String;
-  } else if ((usage as CliCommands).commands) {
-    return UsageType.Commands;
-  } else {
-    return UsageType.Sections;
+function loadFile(
+  appHost: IAppHost,
+  filename: string,
+  options: IAddCliUsageOptions
+): void {
+  const filePath: string = resolve(appHost.basPath, filename);
+  if (!existsSync(filePath)) {
+    throw new Error(`Error. Failed to load ${filePath}.`);
   }
+  const usage: CliUsage = require(filePath);
+  switch (getType(usage)) {
+    case UsageType.Commands:
+      processCommand(appHost, usage as ICliCommands, options);
+      break;
+    case UsageType.Sections:
+      printHelp(appHost, usage as Section | Section[], options);
+      break;
+  }
+}
+
+export function addCliUsage(
+  usage: CliUsage,
+  options?: IAddCliUsageOptions
+): AppHostExtension {
+  const opts: IAddCliUsageOptions = Object.assign(
+    { help: 'help' },
+    options ?? {}
+  );
+  return (appHost: IAppHost) => {
+    switch (getType(usage)) {
+      case UsageType.String:
+        loadFile(appHost, usage as string, opts);
+        break;
+      case UsageType.Commands:
+        processCommand(appHost, usage as ICliCommands, opts);
+        break;
+      case UsageType.Sections:
+        printHelp(appHost, usage as Section | Section[], opts);
+        break;
+    }
+    return appHost;
+  };
 }

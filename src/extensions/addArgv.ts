@@ -1,28 +1,29 @@
-import { IAppHost, AppHostExtension } from "apphost";
-import minimist from "minimist";
-import objectPath from "object-path";
-import { flatten } from "flat";
+import { IAppHost, AppHostExtension } from 'apphost';
+import minimist from 'minimist';
+import type { ParsedArgs } from 'minimist';
+import objectPath from 'object-path';
+import { flatten } from 'flat';
 
-const argv = minimist(process.argv.slice(2));
+const argv: ParsedArgs = minimist(process.argv.slice(2));
 
-export interface AddArgvOptions {
+export interface IAddArgvOptions {
   flags: string[];
 }
 
-export function addArgv(options?: AddArgvOptions): AppHostExtension {
+export function addArgv(options?: IAddArgvOptions): AppHostExtension {
   return (appHost: IAppHost) => {
-    appHost.set("__args", argv._);
+    appHost.set('__args', argv._);
     delete argv._;
     if (options?.flags) {
       for (const flag of options.flags) {
-        const flagValue = objectPath.get(argv, flag);
+        const flagValue: unknown = objectPath.get(argv, flag);
         if (flagValue !== undefined) {
           appHost.set(flag, flagValue);
         }
       }
     } else {
-      const flatObj: any = flatten(argv);
-      for (const [path, value] of Object.entries(flatObj)) {
+      const flatObj: unknown = flatten(argv);
+      for (const [path, value] of Object.entries(flatObj as {})) {
         appHost.set(path, value);
       }
     }

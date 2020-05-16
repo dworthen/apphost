@@ -1,50 +1,50 @@
 // @ts-nocheck
-import { AppHost } from "../src";
+import { AppHost } from '../src';
 import {
   setBasePath,
   addFile,
   addEnv,
   addArgv,
   addCliUsage,
-} from "../src/extensions";
-import { resolve } from "path";
-import tap from "tap";
+} from '../src/extensions';
+import { resolve } from 'path';
+import tap from 'tap';
 
-require("dotenv").config({ path: resolve(__dirname, "fixtures/.env") });
+require('dotenv').config({ path: resolve(__dirname, 'fixtures/.env') });
 
-tap.test("Basic configuration setup", async (t) => {
+tap.test('Basic configuration setup', async (t) => {
   // Arrange
   const appHost = new AppHost();
   const expected = {
-    appName: "MyApp",
+    appName: 'MyApp',
     database: {
-      url: "dev-path",
-      password: "supersecret",
+      url: 'dev-path',
+      password: 'supersecret',
     },
     cors: {
-      allowed: ["path1", "path2", "path3"],
+      allowed: ['path1', 'path2', 'path3'],
       headers: {
-        header1: "header1",
+        header1: 'header1',
       },
     },
     meta: {
-      owner: "dworthen",
+      owner: 'dworthen',
     },
-    __args: ["command"],
+    __args: ['command'],
   };
 
   // Act
   const config = appHost.configure(
-    setBasePath(resolve(__dirname, "fixtures/config")),
-    addFile("appsettings.json"),
-    addFile(`appsettings.${process.env.NODE_ENV || "development"}.json`, {
+    setBasePath(resolve(__dirname, 'fixtures/config')),
+    addFile('appsettings.json'),
+    addFile(`appsettings.${process.env.NODE_ENV || 'development'}.json`, {
       required: false,
     }),
-    addFile("appsettings.meta.json", { key: "meta" }),
-    addFile("DOES_NOT_EXIST", { required: false }),
+    addFile('appsettings.meta.json', { key: 'meta' }),
+    addFile('DOES_NOT_EXIST', { required: false }),
     addEnv(),
     addArgv(),
-    addCliUsage("appusage.js")
+    addCliUsage('appusage.js')
   );
 
   // Assert

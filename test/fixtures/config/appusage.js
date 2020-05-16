@@ -1,59 +1,59 @@
 const main = [
   {
-    header: "Example App",
+    header: 'Example App',
     content:
-      "Generates something {italic very} important. This is a rather long, but ultimately inconsequential description intended solely to demonstrate description appearance. ",
+      'Generates something {italic very} important. This is a rather long, but ultimately inconsequential description intended solely to demonstrate description appearance. ',
   },
   {
-    header: "Synopsis",
-    content: "$ app <options> <command>",
+    header: 'Synopsis',
+    content: '$ app <options> <command>',
   },
   {
-    header: "Command List",
+    header: 'Command List',
     content: [
-      { name: "help", summary: "Display help information about Git." },
-      { name: "commit", summary: "Record changes to the repository." },
-      { name: "Version", summary: "Print the version." },
-      { name: "etc", summary: "Etc." },
+      { name: 'help', summary: 'Display help information about Git.' },
+      { name: 'commit', summary: 'Record changes to the repository.' },
+      { name: 'Version', summary: 'Print the version.' },
+      { name: 'etc', summary: 'Etc.' },
     ],
   },
 ];
 
 const coolCommand = [
   {
-    header: "A typical cool command",
+    header: 'A typical cool command',
     content:
-      "Generates something {italic very} important. This is a rather long, but ultimately inconsequential description intended solely to demonstrate description appearance. ",
+      'Generates something {italic very} important. This is a rather long, but ultimately inconsequential description intended solely to demonstrate description appearance. ',
   },
   {
-    header: "Options",
+    header: 'Options',
     optionList: [
       {
-        name: "help",
-        description: "Display this usage guide.",
-        alias: "h",
+        name: 'help',
+        description: 'Display this usage guide.',
+        alias: 'h',
         type: Boolean,
       },
       {
-        name: "src",
+        name: 'src',
         description:
-          "The input files to process. This is some additional text existing solely to demonstrate word-wrapping, nothing more, nothing less. And nothing in between.",
+          'The input files to process. This is some additional text existing solely to demonstrate word-wrapping, nothing more, nothing less. And nothing in between.',
         type: String,
         multiple: true,
         defaultOption: true,
-        typeLabel: "{underline file} ...",
+        typeLabel: '{underline file} ...',
       },
       {
-        name: "timeout",
-        description: "Timeout value in ms.",
-        alias: "t",
+        name: 'timeout',
+        description: 'Timeout value in ms.',
+        alias: 't',
         type: Number,
-        typeLabel: "{underline ms}",
+        typeLabel: '{underline ms}',
       },
     ],
   },
   {
-    content: "Project home: {underline https://github.com/me/example}",
+    content: 'Project home: {underline https://github.com/me/example}',
   },
 ];
 

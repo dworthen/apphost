@@ -1,4 +1,4 @@
-import { IAppHost, AppHostExtension } from "apphost";
+import { IAppHost, AppHostExtension } from 'apphost';
 
 export function setBasePath(path: string): AppHostExtension {
   return (appHost: IAppHost) => {
