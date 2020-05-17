@@ -1,4 +1,5 @@
-import { IAppHost, AppHostExtension } from 'apphost';
+/// <reference path="../global.ts" />
+/* Above required for vs-code debugging with ts-node */
 import minimist from 'minimist';
 import type { ParsedArgs } from 'minimist';
 import objectPath from 'object-path';

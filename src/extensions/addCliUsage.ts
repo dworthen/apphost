@@ -1,4 +1,5 @@
-import { IAppHost, AppHostExtension } from 'apphost';
+/// <reference path="../global.ts" />
+/* Above required for vs-code debugging with ts-node */
 import type { Section } from 'command-line-usage';
 import commandLineUsage from 'command-line-usage';
 import { resolve } from 'path';

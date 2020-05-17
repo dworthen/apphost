@@ -12,6 +12,7 @@
     "lint": "eslint \"src/**\"",
     "test": "tap -R spec",
     "test:coverage": "tap --coverage-report html",
+    "test:watch": "npm test -- -w",
     "build": "tsc",
     "start": "tsc -w --preserveWatchOutput"
   },

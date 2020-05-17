@@ -1,4 +1,5 @@
-import { AppHostExtension, IAppHost } from 'apphost';
+/// <reference path="../global.ts" />
+/* Above required for vs-code debugging with ts-node */
 
 export function addEnv(prefix: string = 'APP_HOST'): AppHostExtension {
   return (appHost: IAppHost) => {

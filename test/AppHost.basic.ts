@@ -12,7 +12,7 @@ import tap from 'tap';
 
 require('dotenv').config({ path: resolve(__dirname, 'fixtures/.env') });
 
-tap.test('Basic configuration setup', async (t) => {
+tap.test('Basic configuration', async (t) => {
   // Arrange
   const appHost = new AppHost();
   const expected = {
