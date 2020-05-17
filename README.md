@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/apphost.svg)](https://badge.fury.io/js/apphost) ![CI](https://github.com/dworthen/apphost/workflows/CI/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/dworthen/apphost/badge.svg?branch=master)](https://coveralls.io/github/dworthen/apphost?branch=master)
+
 # AppHost
 
 Simple configuration manager. Load and merge config from file, environment variables and cli args.
