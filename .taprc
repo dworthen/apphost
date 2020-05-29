@@ -1,3 +1,4 @@
 test-arg:
   - command
-  - --cors.allowed.2=path3
+  - --corspath=path3
+  - --corsheader=newHeader

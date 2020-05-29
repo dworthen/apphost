@@ -25,6 +25,7 @@ tap.test('Basic configuration', async (t) => {
       allowed: ['path1', 'path2', 'path3'],
       headers: {
         header1: 'header1',
+        header2: 'newHeader',
       },
     },
     meta: {
@@ -43,10 +44,16 @@ tap.test('Basic configuration', async (t) => {
     addFile('appsettings.meta.json', { key: 'meta' }),
     addFile('DOES_NOT_EXIST', { required: false }),
     addEnv(),
-    addArgv(),
+    addArgv({
+      allow: ['cors.allowed.2', 'cors.headers.header2'],
+      alias: {
+        'cors.allowed.2': 'corspath',
+        'cors.headers.header2': 'corsheader',
+      },
+    }),
     addCliUsage('appusage.js')
   );
 
   // Assert
-  t.deepEquals(config, expected);
+  t.deepEquals(expected, config);
 });
