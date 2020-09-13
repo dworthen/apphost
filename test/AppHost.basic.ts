@@ -29,6 +29,7 @@ tap.test('Basic configuration', async (t) => {
         header2: 'newHeader',
       },
       arrayArg: ['one', 'two'],
+      booleanFlag: true,
     },
     meta: {
       owner: 'dworthen',
@@ -38,6 +39,7 @@ tap.test('Basic configuration', async (t) => {
       corspath: 'path3',
       corsheader: 'newHeader',
       'array-arg': ['one', 'two'],
+      booleanFlag: true,
     },
   };
 
@@ -57,7 +59,9 @@ tap.test('Basic configuration', async (t) => {
       },
     }),
     addArgv({
+      argvAliases: [{ argv: 'booleanFlag', aliases: ['b'] }],
       argvToConfigMapping: {
+        booleanFlag: 'cors.booleanFlag',
         corspath: 'cors.allowed.2',
         corsheader: 'cors.headers.header2',
         'array-arg': 'cors.arrayArg',

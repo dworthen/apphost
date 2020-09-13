@@ -1,5 +1,6 @@
 test-arg:
   - command
+  - --b
   - --corspath=path3
   - --corsheader=newHeader
   - --array-arg=one
