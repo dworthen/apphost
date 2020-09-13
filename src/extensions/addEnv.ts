@@ -3,11 +3,11 @@
 
 export interface IAddEnvOptions {
   prefix?: string;
-  mapping?: Record<string, string>;
+  envToConfigMapping?: Record<string, string>;
 }
 
 export function addEnv(options: IAddEnvOptions = {}): AppHostExtension {
-  const { prefix, mapping } = options;
+  const { prefix, envToConfigMapping: mapping } = options;
   return (appHost: IAppHost) => {
     if (mapping) {
       for (const [env, objPath] of Object.entries(mapping)) {

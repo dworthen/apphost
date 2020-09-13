@@ -32,7 +32,11 @@ tap.test('Basic configuration', async (t) => {
     meta: {
       owner: 'dworthen',
     },
-    __args: ['command'],
+    __argv: {
+      _: ['command'],
+      corspath: 'path3',
+      corsheader: 'newHeader',
+    },
   };
 
   // Act
@@ -46,15 +50,14 @@ tap.test('Basic configuration', async (t) => {
     addFile('DOES_NOT_EXIST', { required: false }),
     addEnv({
       prefix: 'APP_HOST_',
-      mapping: {
+      envToConfigMapping: {
         DB_USER: 'database.user',
       },
     }),
     addArgv({
-      allow: ['cors.allowed.2', 'cors.headers.header2'],
-      alias: {
-        'cors.allowed.2': 'corspath',
-        'cors.headers.header2': 'corsheader',
+      argvToConfigMapping: {
+        corspath: 'cors.allowed.2',
+        corsheader: 'cors.headers.header2',
       },
     }),
     addCliUsage('appusage.js')
