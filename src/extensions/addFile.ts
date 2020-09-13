@@ -10,18 +10,15 @@ export interface IAddFileOptions {
 
 export function addFile(
   filename: string,
-  options?: IAddFileOptions
+  options: IAddFileOptions = {}
 ): AppHostExtension {
-  const opts: IAddFileOptions = Object.assign(
-    { required: true },
-    options ?? {}
-  );
+  const { key, required = true } = options;
   return (appHost: IAppHost) => {
     const filePath: string = resolve(appHost.configPath, filename);
     if (existsSync(filePath)) {
       const config: Record<string, unknown> = require(filePath);
-      appHost.merge(config, opts.key);
-    } else if (opts.required) {
+      appHost.merge(config, key);
+    } else if (required) {
       throw new Error(`Error. Failed to load ${filePath}`);
     }
     return appHost;
