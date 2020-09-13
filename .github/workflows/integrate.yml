@@ -48,7 +48,7 @@ jobs:
         run: pnpm run test:coverage
 
       - name: Coverage
-        if: ${{ github.action_name == 'push' && github.ref == 'refs/heads/main }}
+        if: ${{ github.action_name == 'push' && github.ref == 'refs/heads/main' }}
         uses: coverallsapp/github-action@v1.1.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
