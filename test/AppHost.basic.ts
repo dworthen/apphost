@@ -20,6 +20,7 @@ tap.test('Basic configuration', async (t) => {
     database: {
       url: 'dev-path',
       password: 'supersecret',
+      user: 'johndoe',
     },
     cors: {
       allowed: ['path1', 'path2', 'path3'],
@@ -43,7 +44,12 @@ tap.test('Basic configuration', async (t) => {
     }),
     addFile('appsettings.meta.json', { key: 'meta' }),
     addFile('DOES_NOT_EXIST', { required: false }),
-    addEnv(),
+    addEnv({
+      prefix: 'APP_HOST_',
+      mapping: {
+        DB_USER: 'database.user',
+      },
+    }),
     addArgv({
       allow: ['cors.allowed.2', 'cors.headers.header2'],
       alias: {
