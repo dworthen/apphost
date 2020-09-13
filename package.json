@@ -5,7 +5,6 @@
   "main": "lib/index.js",
   "types": "lib/typings/index.d.ts",
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
     "clean:lib": "shx rm -r lib",
     "clean:test": "shx rm -r .nyc_output coverage",
     "clean": "run-p clean:lib clean:test",
@@ -13,7 +12,6 @@
     "test": "tap -R spec",
     "test:watch": "pnpm test -- -w",
     "test:coverage": "tap --coverage-report html",
-    "test:coverage:watch": "nodemon --exec \"npm run test:coverage\" --watch .nyc_output",
     "build": "tsc",
     "start": "tsc -w --preserveWatchOutput"
   },
