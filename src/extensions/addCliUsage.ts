@@ -68,7 +68,7 @@ function loadFile(
   filename: string,
   options: IAddCliUsageOptions
 ): void {
-  const filePath: string = resolve(appHost.basPath, filename);
+  const filePath: string = resolve(appHost.configPath, filename);
   if (!existsSync(filePath)) {
     throw new Error(`Error. Failed to load ${filePath}.`);
   }

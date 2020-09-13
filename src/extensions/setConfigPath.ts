@@ -1,9 +1,9 @@
 /// <reference path="../global.ts" />
 /* Above required for vs-code debugging with ts-node */
 
-export function setBasePath(path: string): AppHostExtension {
+export function setConfigPath(path: string): AppHostExtension {
   return (appHost: IAppHost) => {
-    appHost.basPath = path;
+    appHost.configPath = path;
     return appHost;
   };
 }

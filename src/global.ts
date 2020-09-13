@@ -1,5 +1,5 @@
 interface IAppHost {
-  basPath: string;
+  configPath: string;
   configure: (...appExtensions: AppHostExtension[]) => Record<string, unknown>;
   get: <T>(key: string) => T | undefined;
   set: <T>(key: string, obj: T) => IAppHost;

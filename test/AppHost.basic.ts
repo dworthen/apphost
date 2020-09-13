@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { AppHost } from '../src';
 import {
-  setBasePath,
+  setConfigPath,
   addFile,
   addEnv,
   addArgv,
@@ -36,7 +36,7 @@ tap.test('Basic configuration', async (t) => {
 
   // Act
   const config = appHost.configure(
-    setBasePath(resolve(__dirname, 'fixtures/config')),
+    setConfigPath(resolve(__dirname, 'fixtures/config')),
     addFile('appsettings.json'),
     addFile(`appsettings.${process.env.NODE_ENV || 'development'}.json`, {
       required: false,

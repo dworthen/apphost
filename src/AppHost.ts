@@ -7,7 +7,7 @@ import { join } from 'path';
 export class AppHost implements IAppHost {
   private _config: Record<string, unknown> = {};
 
-  public basPath: string = join(process.cwd(), 'config');
+  public configPath: string = join(process.cwd(), 'config');
 
   public get<T>(key: string): T | undefined {
     const result: T = objectPath.get(this._config, key);

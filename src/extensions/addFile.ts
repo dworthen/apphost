@@ -17,7 +17,7 @@ export function addFile(
     options ?? {}
   );
   return (appHost: IAppHost) => {
-    const filePath: string = resolve(appHost.basPath, filename);
+    const filePath: string = resolve(appHost.configPath, filename);
     if (existsSync(filePath)) {
       const config: Record<string, unknown> = require(filePath);
       appHost.merge(config, opts.key);
