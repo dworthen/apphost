@@ -58,6 +58,7 @@ const coolCommand = [
 ];
 
 module.exports = {
+  defaultCommand: 'main',
   commands: {
     main: main,
     cool: coolCommand,

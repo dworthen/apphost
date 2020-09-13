@@ -1,10 +1,8 @@
-/// <reference path="../global.ts" />
-/* Above required for vs-code debugging with ts-node */
 import minimist from 'minimist';
 import type { ParsedArgs } from 'minimist';
-// import objectPath from 'object-path';
 import { flatten } from 'flat';
 import deepMerge from 'deepmerge';
+import { AppHostExtension, IAppHost } from '../types';
 
 export interface IArgvAlias {
   argv: string;
@@ -30,7 +28,6 @@ export function addArgv(options: IAddArgvOptions = {}): AppHostExtension {
     const argv: ParsedArgs = minimist(process.argv.slice(2), {
       alias: minimistAlias,
     });
-    console.log(argv);
 
     const args: string[] = argv._;
     delete argv._;

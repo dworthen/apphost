@@ -1,7 +1,6 @@
-/// <reference path="../global.ts" />
-/* Above required for vs-code debugging with ts-node */
 import { resolve } from 'path';
 import { existsSync } from 'fs';
+import { AppHostExtension, IAppHost } from '../types';
 
 export interface IAddFileOptions {
   key?: string;

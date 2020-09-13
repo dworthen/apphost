@@ -1,9 +1,8 @@
-/// <reference path="../global.ts" />
-/* Above required for vs-code debugging with ts-node */
 import type { Section } from 'command-line-usage';
 import commandLineUsage from 'command-line-usage';
 import { resolve } from 'path';
 import { existsSync } from 'fs';
+import { IAppHost, AppHostExtension } from '../types';
 
 export type CliUsage = ICliCommands | Section | Section[] | string;
 

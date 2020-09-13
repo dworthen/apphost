@@ -1,5 +1,4 @@
-/// <reference path="../global.ts" />
-/* Above required for vs-code debugging with ts-node */
+import { AppHostExtension, IAppHost } from '../types';
 
 export interface IAddEnvOptions {
   prefix?: string;

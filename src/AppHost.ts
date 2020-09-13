@@ -1,8 +1,7 @@
-/// <reference path="global.ts" />
-/* Above required for vs-code debugging with ts-node */
 import deepMerge from 'deepmerge';
 import objectPath from 'object-path';
 import { join } from 'path';
+import { IAppHost, AppHostExtension } from '.';
 
 export class AppHost implements IAppHost {
   private _config: Record<string, unknown> = {};

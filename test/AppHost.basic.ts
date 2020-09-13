@@ -66,8 +66,8 @@ tap.test('Basic configuration', async (t) => {
         corsheader: 'cors.headers.header2',
         'array-arg': 'cors.arrayArg',
       },
-    }),
-    addCliUsage('appusage.js')
+    })
+    // addCliUsage('appusage.js')
   );
 
   // Assert
