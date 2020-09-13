@@ -17,10 +17,11 @@
   },
   "keywords": [
     "config",
+    "functional config",
+    "functional configuration",
     "configuration",
     "env",
     "environment variables",
-    "service container",
     "cli",
     "argv",
     "configuration manager"
