@@ -2,3 +2,5 @@ test-arg:
   - command
   - --corspath=path3
   - --corsheader=newHeader
+  - --array-arg=one
+  - --array-arg=two

@@ -28,6 +28,7 @@ tap.test('Basic configuration', async (t) => {
         header1: 'header1',
         header2: 'newHeader',
       },
+      arrayArg: ['one', 'two'],
     },
     meta: {
       owner: 'dworthen',
@@ -36,6 +37,7 @@ tap.test('Basic configuration', async (t) => {
       _: ['command'],
       corspath: 'path3',
       corsheader: 'newHeader',
+      'array-arg': ['one', 'two'],
     },
   };
 
@@ -58,6 +60,7 @@ tap.test('Basic configuration', async (t) => {
       argvToConfigMapping: {
         corspath: 'cors.allowed.2',
         corsheader: 'cors.headers.header2',
+        'array-arg': 'cors.arrayArg',
       },
     }),
     addCliUsage('appusage.js')

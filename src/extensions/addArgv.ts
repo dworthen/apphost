@@ -22,12 +22,14 @@ export function addArgv(options: IAddArgvOptions = {}): AppHostExtension {
     const flatArgs: Record<string, unknown> = flatten<
       ParsedArgs,
       Record<string, unknown>
-    >(argv);
+    >(argv, {
+      safe: true,
+    });
 
     appHost.set('__argv', deepMerge({ _: args }, flatArgs));
 
     for (const [arg, value] of Object.entries(flatArgs)) {
-      const objPath: string = argvToConfigMapping[arg.toLowerCase()] ?? arg;
+      const objPath: string = argvToConfigMapping[arg] ?? arg;
       appHost.set(objPath, value);
     }
 
