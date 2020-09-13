@@ -4,19 +4,8 @@ import deepMerge from 'deepmerge';
 import objectPath from 'object-path';
 import { join } from 'path';
 
-function resolve<T>(service: Function): T {
-  let s: T;
-  try {
-    s = new (service as new () => T)();
-  } catch (ex) {
-    s = service() as T;
-  }
-  return s;
-}
-
 export class AppHost implements IAppHost {
   private _config: Record<string, unknown> = {};
-  private _services: Map<string, unknown> = new Map<string, unknown>();
 
   public basPath: string = join(process.cwd(), 'config');
 
@@ -28,22 +17,6 @@ export class AppHost implements IAppHost {
   public set<T>(key: string, obj: T): IAppHost {
     objectPath.set(this._config, key, obj);
     return this;
-  }
-
-  public registerService<T>(name: string, service: T): IAppHost {
-    this._services.set(name, service);
-    return this;
-  }
-
-  public getService<T>(name: string): T | undefined {
-    if (this._services.has(name)) {
-      const service: unknown = this._services.get(name);
-      if (typeof service === 'function') {
-        return resolve(service);
-      }
-      return service as T;
-    }
-    return undefined;
   }
 
   public configure(
