@@ -2,59 +2,77 @@
 
 # AppHost
 
-Simple configuration manager. Load and merge config from file, environment variables and cli args.
+Simple, functional configuration manager. Load and merge config from JSON files, environment variables and cli args.
+
+# Install
+
+```
+npm install apphost -P
+```
+
+# Usage
 
 ```JavaScript
 // config/index.js
 import {
   AppHost,
-  setBasePath,
+  setConfigPath,
   addFile,
   addEnv,
   addArgv
 } from "apphost";
 
 const config = new AppHost().configure(
-  // basePath defaults to CWD/config/
-  setBasePath(resolve(__dirname)),
+  // configPath defaults to CWD/config/
+  setConfigPath('./config'),
+  // load configuration from CWD/config/appsettings.json
   addFile("appsettings.json"),
+  // Overwrite config options with env specific config
   addFile(`appsettings.${process.env.NODE_ENV || "development"}.json`, {
     required: false,
   }),
-  addFile("appsettings.meta.json", {
-    required: true,
-    key: "meta"
+  // Load config options from process.env
+  addEnv({
+    // Optional: merge all env vars starting with prefix
+    prefix: 'APP_HOST_',
+    // OR map env var to config object paths
+    envToConfigMapping: {
+      // process.env.DB_PASSWORD will map to
+      // { database: { password: '' }}
+      DB_PASSWORD: 'database.password'
+    }
+  }),
+  addArgv({
+    // Optional: Specify aliases
+    argvAliases: [{ argv: 'app', aliases: ['a'] }],
+    // Map short argv options to config object paths
+    argvToConfigMapping: {
+      // -a is an alias for --app.
+      // Both will map to { app: { name: '' }}
+      app: 'app.name'
+    },
   })
-  // Speficy env variable prefix. defaults to APP_HOST
-  addEnv("APP_HOST"),
-  addArgv()
 );
 
 export config;
-```
-
-Early in the application, load the config.
-
-```JavaScript
-// app.js
-
-import { config } from './config';
 ```
 
 **config/appsettings.json**
 
 ```JSON
 {
-  "appName": "MyApp",
-  "database": {
-    "url": "path",
-    "password": "secret"
+  "app": {
+    "name": "MyApp",
+    "version": 1.0.0,
+    "description": "cool app"
   },
-  "cors": {
-    "allowed": ["path1", "path2"],
-    "headers": {
-      "header1": "header1"
-    }
+  "database": {
+    "url": "",
+    "user": "",
+    "password": ""
+  },
+  "logging": {
+    "level": "errors"
   }
 }
 ```
@@ -63,33 +81,35 @@ import { config } from './config';
 
 ```JSON
 {
-  "database": {
-    "url": "dev-path"
+  "logging": {
+    "level": "debug"
   }
-}
-```
-
-**appsettings.meta.json**
-
-```JSON
-{
-  "owner": "dworthen"
 }
 ```
 
 **Environment variables**
 
-Environment variables are prefixed. Set nested objects using `_`.
+Enviroment variables map to the config object in two ways.
+
+Variables specified in the `envToConfigMapping` option map as outlined in the mapping.
+
+Variables that match the `prefix` option, if provided, are lowercased then `_` are replaced with `.` to map to config object paths.
 
 ```
 NODE_ENV=development
-APP_HOST_database_password=supersecret
+APP_HOST_DATABASE_USER=admin
+DB_PASSWORD=password123
 ```
 
-Running the application with
+**CLI args**
+
+Like environment variables, cli args map to config object in two ways. Those in the `argvToConfigMapping` are mapped according to the mapping. Otherwise, object paths can be passed directly to the script.
+
+**Running the application with**
 
 ```Shell
-node app.js subcommand --appName "My Awesome App" --cors.allowed.2=path3
+# -a is an alias for --app which maps to app.name
+node app.js -a "My Awesome App" --database.url "dbUrl"
 ```
 
 Results in
@@ -97,26 +117,18 @@ Results in
 ```JavaScript
 // config
 {
-  appName: "My Awesome App",
-  database: {
-    url: "dev-path",
-    password: "supersecret",
+  "app": {
+    "name": "My Awesome App",
+    "version": 1.0.0,
+    "description": "cool app"
   },
-  cors: {
-    allowed: ["path1", "path2", "path3"],
-    headers: {
-      header1: "header1",
-    },
+  "database": {
+    "url": "dbUrl",
+    "user": "admin",
+    "password": "password123"
   },
-  meta: {
-    owner: "dworthen",
-  },
-  __args: ["subcommand"],
+  "logging": {
+    "level": "debug"
+  }
 };
-```
-
-## Install
-
-```Shell
-npm install apphost
 ```
