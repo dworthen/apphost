@@ -1,12 +1,6 @@
 // @ts-nocheck
 import { AppHost } from '../src';
-import {
-  setConfigPath,
-  addFile,
-  addEnv,
-  addArgv,
-  addCliUsage,
-} from '../src/extensions';
+import { setConfigPath, addFile, addEnv, addArgv } from '../src/extensions';
 import { resolve } from 'path';
 import tap from 'tap';
 
@@ -67,7 +61,6 @@ tap.test('Basic configuration', async (t) => {
         'array-arg': 'cors.arrayArg',
       },
     })
-    // addCliUsage('appusage.js')
   );
 
   // Assert

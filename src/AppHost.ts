@@ -1,7 +1,7 @@
 import deepMerge from 'deepmerge';
 import objectPath from 'object-path';
 import { join } from 'path';
-import { IAppHost, AppHostExtension } from '.';
+import { IAppHost, AppHostExtension } from './types';
 
 export class AppHost implements IAppHost {
   private _config: Record<string, unknown> = {};
