@@ -1,6 +1,6 @@
 {
   "name": "apphost",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Functional configuration manager. Load config from file, environment variables, and cli args.",
   "main": "lib/index.js",
   "types": "lib/typings/index.d.ts",
