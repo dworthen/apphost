@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { AppHost } from '../src';
+import { configure } from '../src';
 import { setConfigPath, addFile, addEnv, addArgv } from '../src/extensions';
 import { resolve } from 'path';
 import tap from 'tap';
@@ -8,7 +8,6 @@ require('dotenv').config({ path: resolve(__dirname, 'fixtures/.env') });
 
 tap.test('Basic configuration', async (t) => {
   // Arrange
-  const appHost = new AppHost();
   const expected = {
     appName: 'MyApp',
     database: {
@@ -38,7 +37,7 @@ tap.test('Basic configuration', async (t) => {
   };
 
   // Act
-  const config = appHost.configure(
+  const config = configure(
     setConfigPath(resolve(__dirname, 'fixtures/config')),
     addFile('appsettings.json'),
     addFile(`appsettings.${process.env.NODE_ENV || 'development'}.json`, {

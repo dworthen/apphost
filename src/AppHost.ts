@@ -8,6 +8,10 @@ export class AppHost implements IAppHost {
 
   public configPath: string = join(process.cwd(), 'config');
 
+  public get config() {
+    return this._config;
+  }
+
   public get<T>(key: string): T | undefined {
     const result: T = objectPath.get(this._config, key);
     return result ?? undefined;
@@ -16,15 +20,6 @@ export class AppHost implements IAppHost {
   public set<T>(key: string, obj: T): IAppHost {
     objectPath.set(this._config, key, obj);
     return this;
-  }
-
-  public configure(
-    ...appExtensions: AppHostExtension[]
-  ): Record<string, unknown> {
-    appExtensions.reduce<IAppHost>((acc, cur) => {
-      return cur(acc);
-    }, this);
-    return this._config;
   }
 
   public merge(config: Record<string, unknown>, key?: string): IAppHost {
