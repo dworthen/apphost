@@ -1,12 +1,26 @@
+import dotenv from 'dotenv'
+import dotenvExpand from 'dotenv-expand'
+import { resolve } from 'path'
+
 import { AppHostExtension, IAppHost } from '../types.js'
 
 export interface IAddEnvOptions {
   prefix?: string
   envToConfigMapping?: Record<string, string>
+  dotEnvFiles?: boolean | string | string[]
 }
 
 export function addEnv(options: IAddEnvOptions = {}): AppHostExtension {
-  const { prefix, envToConfigMapping: mapping } = options
+  const { prefix, envToConfigMapping: mapping, dotEnvFiles = false } = options
+
+  if (
+    dotEnvFiles === true ||
+    Array.isArray(dotEnvFiles) ||
+    typeof dotEnvFiles === 'string'
+  ) {
+    loadDotFiles(dotEnvFiles)
+  }
+
   return (appHost: IAppHost) => {
     if (mapping != null) {
       for (const [env, objPath] of Object.entries(mapping)) {
@@ -30,4 +44,17 @@ export function addEnv(options: IAddEnvOptions = {}): AppHostExtension {
 
     return appHost
   }
+}
+
+function loadDotFiles(dotEnvFiles: boolean | string | string[]): void {
+  const filesToLoad = Array.isArray(dotEnvFiles)
+    ? dotEnvFiles
+    : [typeof dotEnvFiles === 'string' ? dotEnvFiles : '.env']
+
+  filesToLoad.forEach((file) => {
+    const env = dotenv.config({
+      path: resolve(process.cwd(), file),
+    })
+    dotenvExpand.expand(env)
+  })
 }

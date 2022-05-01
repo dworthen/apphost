@@ -12,9 +12,9 @@ import tap from 'tap'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-import dotenv from 'dotenv'
+// import dotenv from 'dotenv'
 
-dotenv.config({ path: resolve(__dirname, 'fixtures/.env') })
+// dotenv.config({ path: resolve(__dirname, 'fixtures/.env') })
 
 tap.test('Basic configuration', async (t) => {
   // Arrange
@@ -60,6 +60,7 @@ tap.test('Basic configuration', async (t) => {
       envToConfigMapping: {
         DB_USER: 'database.user',
       },
+      dotEnvFiles: resolve(__dirname, 'fixtures/.env'),
     }),
     addArgv({
       argvAliases: [{ argv: 'booleanFlag', aliases: ['b'] }],

@@ -43,7 +43,7 @@ export type AppHostExtension = (AppHost: IAppHost) => IAppHost;
 // Warning: (ae-missing-release-tag) "configure" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export function configure(...appExtensions: AppHostExtension[]): Record<string, unknown>;
+export function configure<T extends Record<string, unknown> = Record<string, unknown>>(...appExtensions: AppHostExtension[]): T;
 
 // Warning: (ae-missing-release-tag) "IAddArgvOptions" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -59,6 +59,8 @@ export interface IAddArgvOptions {
 //
 // @public (undocumented)
 export interface IAddEnvOptions {
+    // (undocumented)
+    dotEnvFiles?: boolean | string | string[];
     // (undocumented)
     envToConfigMapping?: Record<string, string>;
     // (undocumented)
