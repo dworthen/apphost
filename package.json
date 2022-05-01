@@ -1,6 +1,6 @@
 {
   "name": "apphost",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Functional configuration manager. Load config from file, environment variables, and cli args.",
   "type": "module",
   "main": "./lib/cjs/index.cjs",
