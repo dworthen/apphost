@@ -1,4 +1,4 @@
-[![npm version](https://badge.fury.io/js/apphost.svg)](https://badge.fury.io/js/apphost) ![CI](https://github.com/dworthen/apphost/workflows/CI/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/dworthen/apphost/badge.svg?branch=main)](https://coveralls.io/github/dworthen/apphost?branch=main)
+[![TypeScript](https://img.shields.io/badge/Built%20With-TypeScript-%230074c1.svg?style=for-the-badge&logo=typescript)](http://www.typescriptlang.org/) [![NPM](https://img.shields.io/npm/v/apphost?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/apphost) [![Build Status](https://img.shields.io/github/workflow/status/dworthen/apphost/CI?style=for-the-badge&logo=github)](https://github.com/dworthen/apphost/actions?query=workflow%3ACI) [![Test Coverage](https://img.shields.io/coveralls/github/dworthen/apphost?style=for-the-badge&logo=coveralls)](https://coveralls.io/github/dworthen/apphost)
 
 # AppHost
 

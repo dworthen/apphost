@@ -8,8 +8,13 @@
       "type": "node",
       "request": "launch",
       "name": "TS",
-      "args": ["${relativeFile}"],
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+      "args": [
+        "${relativeFile}"
+      ],
+      "runtimeArgs": [
+        "--loader",
+        "ts-node/esm"
+      ],
       "sourceMaps": true,
       "cwd": "${workspaceRoot}",
       "protocol": "inspector"

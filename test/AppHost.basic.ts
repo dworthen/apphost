@@ -1,10 +1,20 @@
 // @ts-nocheck
-import { configure } from '../src';
-import { setConfigPath, addFile, addEnv, addArgv } from '../src/extensions';
-import { resolve } from 'path';
-import tap from 'tap';
+import { configure } from '../src/index.js'
+import {
+  setConfigPath,
+  addFile,
+  addEnv,
+  addArgv,
+} from '../src/extensions/index.js'
+import { resolve, dirname } from 'path'
+import { fileURLToPath } from 'url'
+import tap from 'tap'
 
-require('dotenv').config({ path: resolve(__dirname, 'fixtures/.env') });
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
+import dotenv from 'dotenv'
+
+dotenv.config({ path: resolve(__dirname, 'fixtures/.env') })
 
 tap.test('Basic configuration', async (t) => {
   // Arrange
@@ -34,7 +44,7 @@ tap.test('Basic configuration', async (t) => {
       'array-arg': ['one', 'two'],
       booleanFlag: true,
     },
-  };
+  }
 
   // Act
   const config = configure(
@@ -59,9 +69,9 @@ tap.test('Basic configuration', async (t) => {
         corsheader: 'cors.headers.header2',
         'array-arg': 'cors.arrayArg',
       },
-    })
-  );
+    }),
+  )
 
   // Assert
-  t.deepEquals(expected, config);
-});
+  t.deepEquals(expected, config)
+})

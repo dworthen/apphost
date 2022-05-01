@@ -3,3 +3,6 @@ coverage
 .nyc_output
 *.log
 lib
+*.env
+.env.*
+apiTemp
