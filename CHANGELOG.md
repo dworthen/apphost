@@ -1,5 +1,11 @@
 # apphost
 
+## 0.2.0
+
+### Minor Changes
+
+- 134bb86: add support for dotenv files
+
 ## 0.1.0
 
 ### Minor Changes
