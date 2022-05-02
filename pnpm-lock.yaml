@@ -4,6 +4,7 @@ specifiers:
   '@changesets/changelog-git': ^0.1.11
   '@changesets/changelog-github': ^0.4.4
   '@changesets/cli': ^2.22.0
+  '@microsoft/api-documenter': ^7.17.11
   '@microsoft/api-extractor': ^7.23.0
   '@types/flat': ^5.0.2
   '@types/minimist': ^1.2.2
@@ -50,6 +51,7 @@ devDependencies:
   '@changesets/changelog-git': 0.1.11
   '@changesets/changelog-github': 0.4.4
   '@changesets/cli': 2.22.0
+  '@microsoft/api-documenter': 7.17.11
   '@microsoft/api-extractor': 7.23.0
   '@types/flat': 5.0.2
   '@types/minimist': 1.2.2
@@ -557,6 +559,19 @@ packages:
       fs-extra: 8.1.0
       globby: 11.1.0
       read-yaml-file: 1.1.0
+    dev: true
+
+  /@microsoft/api-documenter/7.17.11:
+    resolution: {integrity: sha512-VdCu4eG5RISGEiG/hFO3jaN3gEgMZVXZRFpch/PQzrLO3Vh2QhZTz2LsZ2SYyb7UwBZCK9Z76ULv5cGoflylNA==}
+    hasBin: true
+    dependencies:
+      '@microsoft/api-extractor-model': 7.17.2
+      '@microsoft/tsdoc': 0.14.1
+      '@rushstack/node-core-library': 3.45.4
+      '@rushstack/ts-command-line': 4.10.10
+      colors: 1.2.5
+      js-yaml: 3.13.1
+      resolve: 1.17.0
     dev: true
 
   /@microsoft/api-extractor-model/7.17.2:
@@ -3092,7 +3107,7 @@ packages:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
     dependencies:
       hosted-git-info: 2.8.8
-      resolve: 1.17.0
+      resolve: 1.22.0
       semver: 5.7.1
       validate-npm-package-license: 3.0.4
     dev: true
@@ -3391,10 +3406,6 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /path-parse/1.0.6:
-    resolution: {integrity: sha512-GSmOT2EbHrINBf9SR7CDELwlJ8AENk3Qn7OikK4nFYAu3Ote2+JYNVvkpAEQm3/TLNEJFD/xZJjzyxg3KBWOzw==}
-    dev: true
-
   /path-parse/1.0.7:
     resolution: {integrity: sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==}
     dev: true
@@ -3551,7 +3562,7 @@ packages:
     resolution: {integrity: sha1-hSBLVNuoLVdC4oyWdW70OvUOM4Q=}
     engines: {node: '>= 0.10'}
     dependencies:
-      resolve: 1.17.0
+      resolve: 1.22.0
     dev: true
 
   /redent/3.0.0:
@@ -3605,7 +3616,7 @@ packages:
   /resolve/1.17.0:
     resolution: {integrity: sha512-ic+7JYiV8Vi2yzQGFWOkiZD5Z9z7O2Zhm9XMaTxdJExKasieFCr+yXZ/WmXsckHiKl12ar0y6XiXDx3m4RHn1w==}
     dependencies:
-      path-parse: 1.0.6
+      path-parse: 1.0.7
     dev: true
 
   /resolve/1.19.0:
