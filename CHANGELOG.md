@@ -1,5 +1,11 @@
 # apphost
 
+## 0.3.1
+
+### Patch Changes
+
+- 2cba6a5: generate api docs
+
 ## 0.3.0
 
 ### Minor Changes
