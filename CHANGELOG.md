@@ -1,5 +1,11 @@
 # apphost
 
+## 0.3.0
+
+### Minor Changes
+
+- ebcdde9: update addEnv and addArgv
+
 ## 0.2.0
 
 ### Minor Changes
