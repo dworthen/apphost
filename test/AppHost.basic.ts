@@ -33,9 +33,17 @@ tap.test('Basic configuration', async (t) => {
       },
       arrayArg: ['one', 'two'],
       booleanFlag: true,
+      shouldBe: {
+        num: 5,
+      },
     },
     meta: {
       owner: 'dworthen',
+    },
+    env: {
+      camelCase: true,
+      num: 65537,
+      empty: '',
     },
     __argv: {
       _: ['command'],
@@ -43,6 +51,7 @@ tap.test('Basic configuration', async (t) => {
       corsheader: 'newHeader',
       'array-arg': ['one', 'two'],
       booleanFlag: true,
+      'shouldBe.num': 5,
     },
   }
 
@@ -69,6 +78,7 @@ tap.test('Basic configuration', async (t) => {
         corspath: 'cors.allowed.2',
         corsheader: 'cors.headers.header2',
         'array-arg': 'cors.arrayArg',
+        'shouldBe.num': 'cors.shouldBe.num',
       },
     }),
   )

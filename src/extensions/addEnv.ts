@@ -24,8 +24,9 @@ export function addEnv(options: IAddEnvOptions = {}): AppHostExtension {
   return (appHost: IAppHost) => {
     if (mapping != null) {
       for (const [env, objPath] of Object.entries(mapping)) {
-        if (process.env[env] != null) {
-          appHost.set(objPath, process.env[env])
+        const value = process.env[env]
+        if (value != null) {
+          appHost.set(objPath, parseValue(value))
         }
       }
     }
@@ -35,15 +36,27 @@ export function addEnv(options: IAddEnvOptions = {}): AppHostExtension {
         if (env.startsWith(prefix)) {
           const path: string = env
             .substring(prefix.length)
-            .toLowerCase()
-            .replace(/_/g, '.')
-          appHost.set(path, value)
+            .split('_')
+            .map((part, index) => {
+              return index === 0
+                ? part.toLocaleLowerCase()
+                : part[0].toLocaleUpperCase() +
+                    part.slice(1).toLocaleLowerCase()
+            })
+            .join('')
+          appHost.set(path, parseValue(value ?? ''))
         }
       }
     }
 
     return appHost
   }
+}
+
+function parseValue(value: string): string | boolean | number {
+  if (value.toLocaleLowerCase() === 'true') return true
+  if (!isNaN(parseFloat(value))) return parseFloat(value)
+  return value
 }
 
 function loadDotFiles(dotEnvFiles: boolean | string | string[]): void {

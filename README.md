@@ -92,14 +92,14 @@ Enviroment variables map to the config object in two ways.
 
 Variables specified in the `envToConfigMapping` option map as outlined in the mapping.
 
-Variables that match the `prefix` option, if provided, are lowercased and then `_` are replaced with `.` in order to map to config object paths.
+Variables that match the `prefix` option, if provided, are lowercased and then `_` are treated as spaces and the joined as a camelCase string.
 
 ```
 NODE_ENV=development
 # Maps to database.user
-APP_HOST_DATABASE_USER=admin
+APP_HOST_DATABASE.USER=admin
 # Maps to database.password
-DB_PASSWORD=password123
+DB.PASSWORD=password123
 ```
 
 **CLI args**

@@ -5,3 +5,4 @@ test-arg:
   - --corsheader=newHeader
   - --array-arg=one
   - --array-arg=two
+  - --shouldBe.num=5
