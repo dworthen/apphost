@@ -1,11 +1,12 @@
 // @ts-nocheck
-import { configure } from '../src/index.js'
 import {
+  configure,
   setConfigPath,
   addFile,
   addEnv,
   addArgv,
-} from '../src/extensions/index.js'
+  loadEnvFile,
+} from '../src/index.js'
 import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import tap from 'tap'
@@ -20,6 +21,8 @@ tap.test('Basic configuration', async (t) => {
   // Arrange
   const expected = {
     appName: 'MyApp',
+    num: 65537,
+    noFlag: false,
     database: {
       url: 'dev-path',
       password: 'supersecret',
@@ -35,6 +38,12 @@ tap.test('Basic configuration', async (t) => {
       booleanFlag: true,
       shouldBe: {
         num: 5,
+      },
+    },
+    some: {
+      nested: {
+        prop: 'Basic user:pass',
+        missing: 'missing env variable: ',
       },
     },
     meta: {
@@ -58,6 +67,7 @@ tap.test('Basic configuration', async (t) => {
   // Act
   const config = configure(
     setConfigPath(resolve(__dirname, 'fixtures/config')),
+    loadEnvFile('.env'),
     addFile('appsettings.json'),
     addFile(`appsettings.${process.env.NODE_ENV || 'development'}.json`, {
       required: false,
@@ -69,7 +79,6 @@ tap.test('Basic configuration', async (t) => {
       envToConfigMapping: {
         DB_USER: 'database.user',
       },
-      dotEnvFiles: resolve(__dirname, 'fixtures/.env'),
     }),
     addArgv({
       argvAliases: [{ argv: 'booleanFlag', aliases: ['b'] }],

@@ -1,25 +1,12 @@
-import dotenv from 'dotenv'
-import dotenvExpand from 'dotenv-expand'
-import { resolve } from 'path'
-
 import { AppHostExtension, IAppHost } from '../types.js'
 
 export interface IAddEnvOptions {
   prefix?: string
   envToConfigMapping?: Record<string, string>
-  dotEnvFiles?: boolean | string | string[]
 }
 
 export function addEnv(options: IAddEnvOptions = {}): AppHostExtension {
-  const { prefix, envToConfigMapping: mapping, dotEnvFiles = false } = options
-
-  if (
-    dotEnvFiles === true ||
-    Array.isArray(dotEnvFiles) ||
-    typeof dotEnvFiles === 'string'
-  ) {
-    loadDotFiles(dotEnvFiles)
-  }
+  const { prefix, envToConfigMapping: mapping } = options
 
   return (appHost: IAppHost) => {
     if (mapping != null) {
@@ -55,19 +42,7 @@ export function addEnv(options: IAddEnvOptions = {}): AppHostExtension {
 
 function parseValue(value: string): string | boolean | number {
   if (value.toLocaleLowerCase() === 'true') return true
+  if (value.toLocaleLowerCase() === 'false') return false
   if (!isNaN(parseFloat(value))) return parseFloat(value)
   return value
-}
-
-function loadDotFiles(dotEnvFiles: boolean | string | string[]): void {
-  const filesToLoad = Array.isArray(dotEnvFiles)
-    ? dotEnvFiles
-    : [typeof dotEnvFiles === 'string' ? dotEnvFiles : '.env']
-
-  filesToLoad.forEach((file) => {
-    const env = dotenv.config({
-      path: resolve(process.cwd(), file),
-    })
-    dotenvExpand.expand(env)
-  })
 }
