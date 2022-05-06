@@ -60,8 +60,6 @@ export interface IAddArgvOptions {
 // @public (undocumented)
 export interface IAddEnvOptions {
     // (undocumented)
-    dotEnvFiles?: boolean | string | string[];
-    // (undocumented)
     envToConfigMapping?: Record<string, string>;
     // (undocumented)
     prefix?: string;
@@ -71,6 +69,8 @@ export interface IAddEnvOptions {
 //
 // @public (undocumented)
 export interface IAddFileOptions {
+    // (undocumented)
+    expandEnv?: boolean;
     // (undocumented)
     key?: string;
     // (undocumented)
@@ -102,6 +102,11 @@ export interface IArgvAlias {
     // (undocumented)
     argv: string;
 }
+
+// Warning: (ae-missing-release-tag) "loadEnvFile" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function loadEnvFile(file: string): AppHostExtension;
 
 // Warning: (ae-missing-release-tag) "setConfigPath" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

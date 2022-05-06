@@ -18,6 +18,7 @@
 |  [addEnv(options)](./apphost.addenv.md) |  |
 |  [addFile(filename, options)](./apphost.addfile.md) |  |
 |  [configure(appExtensions)](./apphost.configure.md) |  |
+|  [loadEnvFile(file)](./apphost.loadenvfile.md) |  |
 |  [setConfigPath(path)](./apphost.setconfigpath.md) |  |
 
 ## Interfaces

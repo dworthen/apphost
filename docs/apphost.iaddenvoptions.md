@@ -14,7 +14,6 @@ export interface IAddEnvOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [dotEnvFiles?](./apphost.iaddenvoptions.dotenvfiles.md) | boolean \| string \| string\[\] | <i>(Optional)</i> |
 |  [envToConfigMapping?](./apphost.iaddenvoptions.envtoconfigmapping.md) | Record&lt;string, string&gt; | <i>(Optional)</i> |
 |  [prefix?](./apphost.iaddenvoptions.prefix.md) | string | <i>(Optional)</i> |
 

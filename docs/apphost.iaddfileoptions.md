@@ -14,6 +14,7 @@ export interface IAddFileOptions
 
 |  Property | Type | Description |
 |  --- | --- | --- |
+|  [expandEnv?](./apphost.iaddfileoptions.expandenv.md) | boolean | <i>(Optional)</i> |
 |  [key?](./apphost.iaddfileoptions.key.md) | string | <i>(Optional)</i> |
 |  [required?](./apphost.iaddfileoptions.required.md) | boolean | <i>(Optional)</i> |
 
