@@ -5,4 +5,5 @@ coverage
 lib
 *.env
 .env.*
+!test/fixtures/config/.env
 apiTemp
