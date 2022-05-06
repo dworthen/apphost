@@ -1,5 +1,0 @@
----
-'apphost': patch
----
-
-fix docs
