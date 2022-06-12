@@ -18,6 +18,7 @@
     "skipLibCheck": true,
     "useDefineForClassFields": true,
     "forceConsistentCasingInFileNames": true,
-    "noErrorTruncation": true
+    "noErrorTruncation": true,
+    "preserveWatchOutput": true,
   }
 }
